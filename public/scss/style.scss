@@ -1,0 +1,301 @@
+// memo
+// ブラウザのCSSではh1のマージンは0.83em・・・h1×0,83
+//                 pのマージンは1em・・・p×１
+// emは本炉サイズに対する倍率
+
+//変数
+$mainColor: #29abe2;
+$BREAK_POINT_SM: 600px;
+$BREAK_POINT_MD: 1025px;
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@mixin min-screen($breakpoint) {
+  // 引数に設定された画面幅以下のスタイルを指定するメディアクエリ
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// ページ全体の設定
+body {
+  margin: 0;
+  font-family: sans-serif;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+
+header {
+  padding: 25px 15px;
+  color: $mainColor;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center; //textのみが対象になる
+  font-family: "Exo 2", sans-serif;
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    // color: #ffffff;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+
+    li:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.header-inner {
+  @include min-screen($BREAK_POINT_SM) {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @include min-screen($BREAK_POINT_MD) {
+    max-width: 1100px;
+  }
+}
+
+.contents {
+  background-color: $mainColor;
+  padding: 40px 15px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  @include min-screen($BREAK_POINT_MD) {
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+article {
+  background-color: #ffffff;
+  padding: 20px;
+  @include min-screen($BREAK_POINT_SM) {
+    padding: 20px 60px;
+  }
+  @include min-screen($BREAK_POINT_MD) {
+    width: 68%;
+    box-sizing: border-box;
+  }
+  time {
+    color: #666666;
+    display: block;
+    margin-bottom: 15px;
+  }
+  figure {
+    margin: 0;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  h1 {
+    // margin: 0;
+    font-size: 30px;
+    @include min-screen($BREAK_POINT_SM) {
+      font-size: 40px;
+    }
+  }
+  p {
+    // margin: 0;
+    line-height: 2;
+    @include min-screen($BREAK_POINT_SM) {
+      font-size: 18px;
+    }
+  }
+}
+
+.sub {
+  @include min-screen($BREAK_POINT_MD) {
+    width: 28%;
+  }
+}
+
+aside {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.profile {
+  @include min-screen($BREAK_POINT_MD) {
+    margin-top: 0;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  figure {
+    text-align: center;
+  }
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.topics ul {
+  list-style: none;
+  padding: 0;
+  a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    figure {
+      margin: 0;
+      width: 100px;
+      flex: none;
+
+      img {
+        width: 100%;
+        height: auto;
+        vertical-align: bottom;
+      }
+    }
+    h3 {
+      font-size: 14px;
+      margin: 0 0 0 10px;
+    }
+  }
+}
+
+h2 {
+  color: $mainColor;
+  font-weight: normal;
+  font-family: "Exo 2", sans-serif;
+  text-align: center;
+}
+
+footer {
+  background-color: #6ac4eb;
+  padding: 25px 15px;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  font-family: "Exo 2", sans-serif;
+}
+
+// index.html
+.hero {
+  background-image: url(../img/walk.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 532px;
+  color: #ffffff;
+  padding: 15px; //h1の上マージンを画像内に入れ込む
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-size: 48px;
+    font-family: "Exo 2", sans-serif;
+    text-shadow: 0 0 10px #444444;
+    text-align: center;
+    @include min-screen($BREAK_POINT_SM) {
+      font-size: 72px;
+    }
+  }
+  p {
+    font-weight: bold;
+    text-shadow: 0 0 10px #444444;
+    margin-top: 0;
+  }
+  a {
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 10px 40px;
+    background-color: rgba(41, 171, 226, 0.7);
+    margin-top: 10px;
+  }
+}
+
+.toppost {
+  padding: 15px;
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include min-screen($BREAK_POINT_SM) {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+  article {
+    padding: 0;
+    width: 48%;
+    flex: none;
+    &:not(:nth-last-child(-n + 2)) {
+      margin-bottom: 12px;
+    }
+    h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+    @include min-screen($BREAK_POINT_SM) {
+      width: 23%;
+      &:not(:nth-last-child(-n + 2)) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// about
+
+table {
+  border-collapse: collapse;
+  th,
+  td {
+    border: solid 1px #cccccc;
+    padding: 18px;
+  }
+  th {
+    width: 4em;
+    text-align-last: left;
+    background-color: #135977;
+    color: #ffffff;
+  }
+  td {
+    background-color: #e8eef9;
+  }
+}
+
+// contact
+input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+textarea {
+  height: 120px;
+}
+
+.btn {
+  background-color: #ffaa00;
+  border: none;
+  -webkit-appearance: none;
+  @include min-screen($BREAK_POINT_SM) {
+    width: 250px;
+  }
+}
